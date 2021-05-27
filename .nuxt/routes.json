@@ -1,0 +1,156 @@
+[
+  {
+    "name": "admin___en",
+    "path": "/admin",
+    "component": "/home/eslam/my-projects/Task/client/pages/admin/index.vue",
+    "chunkName": "pages/admin/index",
+    "_name": "_62a52255"
+  },
+  {
+    "name": "index___ar",
+    "path": "/ar",
+    "component": "/home/eslam/my-projects/Task/client/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_3891e556"
+  },
+  {
+    "name": "login___en",
+    "path": "/login",
+    "component": "/home/eslam/my-projects/Task/client/pages/login.vue",
+    "chunkName": "pages/login",
+    "_name": "_a5429f28"
+  },
+  {
+    "name": "register___en",
+    "path": "/register",
+    "component": "/home/eslam/my-projects/Task/client/pages/register.vue",
+    "chunkName": "pages/register",
+    "_name": "_0734fe20"
+  },
+  {
+    "name": "admin-login___en",
+    "path": "/admin/login",
+    "component": "/home/eslam/my-projects/Task/client/pages/admin/login.vue",
+    "chunkName": "pages/admin/login",
+    "_name": "_2c4cc56c"
+  },
+  {
+    "name": "admin-products___en",
+    "path": "/admin/products",
+    "component": "/home/eslam/my-projects/Task/client/pages/admin/products/index.vue",
+    "chunkName": "pages/admin/products/index",
+    "_name": "_691b03f4"
+  },
+  {
+    "name": "admin-users___en",
+    "path": "/admin/users",
+    "component": "/home/eslam/my-projects/Task/client/pages/admin/users/index.vue",
+    "chunkName": "pages/admin/users/index",
+    "_name": "_54b0aece"
+  },
+  {
+    "name": "admin___ar",
+    "path": "/ar/admin",
+    "component": "/home/eslam/my-projects/Task/client/pages/admin/index.vue",
+    "chunkName": "pages/admin/index",
+    "_name": "_62a52255"
+  },
+  {
+    "name": "login___ar",
+    "path": "/ar/login",
+    "component": "/home/eslam/my-projects/Task/client/pages/login.vue",
+    "chunkName": "pages/login",
+    "_name": "_a5429f28"
+  },
+  {
+    "name": "register___ar",
+    "path": "/ar/register",
+    "component": "/home/eslam/my-projects/Task/client/pages/register.vue",
+    "chunkName": "pages/register",
+    "_name": "_0734fe20"
+  },
+  {
+    "name": "admin-products-create___en",
+    "path": "/admin/products/create",
+    "component": "/home/eslam/my-projects/Task/client/pages/admin/products/create.vue",
+    "chunkName": "pages/admin/products/create",
+    "_name": "_3c0c756c"
+  },
+  {
+    "name": "admin-users-create___en",
+    "path": "/admin/users/create",
+    "component": "/home/eslam/my-projects/Task/client/pages/admin/users/create.vue",
+    "chunkName": "pages/admin/users/create",
+    "_name": "_691975b0"
+  },
+  {
+    "name": "admin-login___ar",
+    "path": "/ar/admin/login",
+    "component": "/home/eslam/my-projects/Task/client/pages/admin/login.vue",
+    "chunkName": "pages/admin/login",
+    "_name": "_2c4cc56c"
+  },
+  {
+    "name": "admin-products___ar",
+    "path": "/ar/admin/products",
+    "component": "/home/eslam/my-projects/Task/client/pages/admin/products/index.vue",
+    "chunkName": "pages/admin/products/index",
+    "_name": "_691b03f4"
+  },
+  {
+    "name": "admin-users___ar",
+    "path": "/ar/admin/users",
+    "component": "/home/eslam/my-projects/Task/client/pages/admin/users/index.vue",
+    "chunkName": "pages/admin/users/index",
+    "_name": "_54b0aece"
+  },
+  {
+    "name": "admin-products-create___ar",
+    "path": "/ar/admin/products/create",
+    "component": "/home/eslam/my-projects/Task/client/pages/admin/products/create.vue",
+    "chunkName": "pages/admin/products/create",
+    "_name": "_3c0c756c"
+  },
+  {
+    "name": "admin-users-create___ar",
+    "path": "/ar/admin/users/create",
+    "component": "/home/eslam/my-projects/Task/client/pages/admin/users/create.vue",
+    "chunkName": "pages/admin/users/create",
+    "_name": "_691975b0"
+  },
+  {
+    "name": "admin-products-id-edit___ar",
+    "path": "/ar/admin/products/:id/edit",
+    "component": "/home/eslam/my-projects/Task/client/pages/admin/products/_id/edit.vue",
+    "chunkName": "pages/admin/products/_id/edit",
+    "_name": "_1f7f868d"
+  },
+  {
+    "name": "admin-users-id-edit___ar",
+    "path": "/ar/admin/users/:id/edit",
+    "component": "/home/eslam/my-projects/Task/client/pages/admin/users/_id/edit.vue",
+    "chunkName": "pages/admin/users/_id/edit",
+    "_name": "_5d74b573"
+  },
+  {
+    "name": "admin-products-id-edit___en",
+    "path": "/admin/products/:id/edit",
+    "component": "/home/eslam/my-projects/Task/client/pages/admin/products/_id/edit.vue",
+    "chunkName": "pages/admin/products/_id/edit",
+    "_name": "_1f7f868d"
+  },
+  {
+    "name": "admin-users-id-edit___en",
+    "path": "/admin/users/:id/edit",
+    "component": "/home/eslam/my-projects/Task/client/pages/admin/users/_id/edit.vue",
+    "chunkName": "pages/admin/users/_id/edit",
+    "_name": "_5d74b573"
+  },
+  {
+    "name": "index___en",
+    "path": "/",
+    "component": "/home/eslam/my-projects/Task/client/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_3891e556"
+  }
+]
