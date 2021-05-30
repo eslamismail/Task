@@ -81,12 +81,16 @@ export default {
           type: "number",
         },
         {
-          label: "first name",
-          field: "first_name",
+          label: "arabic name",
+          field: "translations.0.name",
         },
         {
-          label: "last name",
-          field: "last_name",
+          label: "english name",
+          field: "translations.1.name",
+        },
+        {
+          label: "birthdate",
+          field: "birthdate",
         },
         {
           label: "email",
@@ -141,7 +145,8 @@ export default {
   watch: {
     users(val, oldVal) {
       this.users.forEach((item, key) => {
-        item.created_at = moment(item.created_at).format("llll");
+        item.created_at = moment(item.created_at).locale("en").format("llll");
+        item.birthdate = momentH(item.birthdate).format("iYYYY - iMMM - iD");
       });
     },
   },

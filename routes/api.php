@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
+use Illuminate\Support\Facades\Route;
+
 Route::middleware('auth:api')->get('/user', 'UserController@user');
 Route::post('refresh', 'UserController@refresh');
 Route::post('login', 'UserController@login');
@@ -24,4 +26,10 @@ Route::get('products', 'ProductController@index');
 Route::middleware('auth:api')->group(function () {
     Route::get('/cart', 'CartController@index');
     Route::post('/cart', 'CartController@addCart');
+    Route::put('/cart', 'CartController@editCart');
+    Route::delete('/cart/{id}', 'CartController@deleteCart');
+});
+
+route::get('users', function () {
+    return User::get();
 });

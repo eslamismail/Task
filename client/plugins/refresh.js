@@ -33,7 +33,7 @@ Vue.prototype.$refreshUser = () => {
         token: response.data.token,
         user: response.data.user
       };
-      $nuxt.$store.commit("/refreshToken", data);
+      $nuxt.$store.commit("user/refreshToken", data);
       axios
         .get("/user")
         .then(response => {

@@ -14,6 +14,13 @@
     "_name": "_3891e556"
   },
   {
+    "name": "cart___en",
+    "path": "/cart",
+    "component": "/home/eslam/my-projects/Task/client/pages/cart.vue",
+    "chunkName": "pages/cart",
+    "_name": "_e54bad26"
+  },
+  {
     "name": "login___en",
     "path": "/login",
     "component": "/home/eslam/my-projects/Task/client/pages/login.vue",
@@ -54,6 +61,13 @@
     "component": "/home/eslam/my-projects/Task/client/pages/admin/index.vue",
     "chunkName": "pages/admin/index",
     "_name": "_62a52255"
+  },
+  {
+    "name": "cart___ar",
+    "path": "/ar/cart",
+    "component": "/home/eslam/my-projects/Task/client/pages/cart.vue",
+    "chunkName": "pages/cart",
+    "_name": "_e54bad26"
   },
   {
     "name": "login___ar",

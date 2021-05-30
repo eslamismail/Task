@@ -48,8 +48,31 @@ class CartController extends Controller
         $newCart = CartProduct::with('product')->find($newCart->id);
 
         return response()->json([
-            'message' => 'Product added successfully to rour cart',
+            'message' => 'Product has been added successfully to rour cart',
             'cart' => $newCart,
+        ]);
+    }
+
+    public function editCart(Request $request)
+    {
+        // return $request->all();
+        $cart = CartProduct::with('product')->findOrFail($request->id);
+        $data = $request->only('quantity');
+        $cart->update($data);
+
+        return response()->json([
+            'cart' => $cart,
+            'message' => 'Cart has been updated successfully',
+        ]);
+    }
+
+    public function deleteCart($id)
+    {
+        $cart = CartProduct::with('product')->findOrFail($id);
+        $cart->delete();
+        return response()->json([
+            'message' => 'cart has been deleted successfully',
+            'cart' => $cart,
         ]);
     }
 }

@@ -2,15 +2,24 @@
 
 namespace App\Models;
 
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Storage;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable implements JWTSubject, TranslatableContract
 {
     use HasFactory, Notifiable;
+    use Translatable;
+
+    public $translatedAttributes = [
+        'name',
+    ];
+
+    public $translationModel = 'App\Models\UsersTranslation';
 
     public function getJWTIdentifier()
     {
@@ -50,13 +59,7 @@ class User extends Authenticatable implements JWTSubject
 
     protected $appends = [
         'avatar',
-        'name',
     ];
-
-    public function getNameAttribute()
-    {
-        return "{$this->first_name} {$this->last_name}";
-    }
 
     public function getAvatarAttribute()
     {

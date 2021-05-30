@@ -6,6 +6,7 @@ import scrollBehavior from './router.scrollBehavior.js'
 
 const _62a52255 = () => interopDefault(import('../client/pages/admin/index.vue' /* webpackChunkName: "pages/admin/index" */))
 const _3891e556 = () => interopDefault(import('../client/pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _e54bad26 = () => interopDefault(import('../client/pages/cart.vue' /* webpackChunkName: "pages/cart" */))
 const _a5429f28 = () => interopDefault(import('../client/pages/login.vue' /* webpackChunkName: "pages/login" */))
 const _0734fe20 = () => interopDefault(import('../client/pages/register.vue' /* webpackChunkName: "pages/register" */))
 const _2c4cc56c = () => interopDefault(import('../client/pages/admin/login.vue' /* webpackChunkName: "pages/admin/login" */))
@@ -36,6 +37,10 @@ export const routerOptions = {
     component: _3891e556,
     name: "index___ar"
   }, {
+    path: "/cart",
+    component: _e54bad26,
+    name: "cart___en"
+  }, {
     path: "/login",
     component: _a5429f28,
     name: "login___en"
@@ -59,6 +64,10 @@ export const routerOptions = {
     path: "/ar/admin",
     component: _62a52255,
     name: "admin___ar"
+  }, {
+    path: "/ar/cart",
+    component: _e54bad26,
+    name: "cart___ar"
   }, {
     path: "/ar/login",
     component: _a5429f28,

@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-navbar toggleable="lg" type="dark" variant="info">
-      <b-navbar-brand class="text-white" href="/">Task</b-navbar-brand>
+      <b-navbar-brand class="text-white" to="/">Task</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse is-nav>
@@ -26,6 +26,10 @@
               v-for="(item, index) in cart"
               :key="index"
             >({{item.quantity}}) {{item.product.name}}</b-dropdown-item>
+            <b-dropdown-item to="/cart" class="justify-content-center align-items-center">
+              <i class="fas fa-eye"></i>
+              <span>View all</span>
+            </b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>

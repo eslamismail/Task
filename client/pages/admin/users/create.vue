@@ -22,33 +22,33 @@
                   <label
                     for="first_name"
                     class="col-md-3 col-sm-3 col-form-label text-capitalize"
-                  >first name</label>
+                  >arabic name</label>
                   <div class="col-md-8 col-sm-9">
                     <input
                       type="text"
-                      name="first_name"
-                      placeholder="First name"
-                      id="first_name"
+                      name="ar[name]"
+                      placeholder="Arabic name"
+                      id="arabic_name"
                       class="form-control"
                     />
-                    <error v-for="(item, index) in errors.first_name" :error="item" :key="index" />
+                    <error v-for="(item, index) in errors['ar.name']" :error="item" :key="index" />
                   </div>
                 </div>
 
                 <div class="form-group row">
                   <label
-                    for="last_name"
+                    for="english_name"
                     class="col-form-label col-md-3 col-sm-3 text-capitalize"
-                  >last name</label>
+                  >english name</label>
                   <div class="col-md-8 col-sm-9">
                     <input
-                      placeholder="Last name"
+                      placeholder="English name"
                       type="text"
-                      name="last_name"
-                      id="last_name"
+                      name="en[name]"
+                      id="english_name"
                       class="form-control"
                     />
-                    <error v-for="(item, index) in errors.last_name" :error="item" :key="index" />
+                    <error v-for="(item, index) in errors['en.name']" :error="item" :key="index" />
                   </div>
                 </div>
 
@@ -63,6 +63,23 @@
                       class="form-control"
                     />
                     <error v-for="(item, index) in errors.email" :error="item" :key="index" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label
+                    for="birthdate"
+                    class="col-form-label col-md-3 col-sm-3 text-capitalize"
+                  >birthdate</label>
+                  <div class="col-md-8 col-sm-9">
+                    <input
+                      placeholder="birthdate"
+                      type="date"
+                      name="birthdate"
+                      id="birthdate"
+                      class="form-control"
+                    />
+                    <error v-for="(item, index) in errors.birthdate" :error="item" :key="index" />
                   </div>
                 </div>
 
@@ -162,6 +179,7 @@ export default {
           text: response.data.message,
           type: "success",
         });
+        // console.log(response?.data);
         this.$router.push("/admin/users");
       } catch (error) {
         this.errors = {};

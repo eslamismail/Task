@@ -12,30 +12,36 @@
                   </div>
                 </div>
                 <div class="form-group row justify-content-center">
-                  <label for="first_name" class="col-form-label col-md-3 text-capitalize">first name</label>
+                  <label
+                    for="arabic_name"
+                    class="col-form-label col-md-3 text-capitalize"
+                  >arabic name</label>
                   <div class="col-md-6">
                     <input
-                      placeholder="Please enter your first name"
+                      placeholder="arabic name"
                       type="text"
-                      name="first_name"
-                      id="first_name"
+                      name="ar[name]"
+                      id="arabic_name"
                       class="form-control"
                     />
-                    <error v-for="(item, index) in errors.first_name" :error="item" :key="index" />
+                    <error v-for="(item, index) in errors['ar.name']" :error="item" :key="index" />
                   </div>
                 </div>
 
                 <div class="form-group row justify-content-center">
-                  <label for="last_name" class="col-form-label col-md-3 text-capitalize">last name</label>
+                  <label
+                    for="english_name"
+                    class="col-form-label col-md-3 text-capitalize"
+                  >English name</label>
                   <div class="col-md-6">
                     <input
-                      placeholder="Please enter your last name"
+                      placeholder="English name"
                       type="text"
-                      name="last_name"
-                      id="last_name"
+                      name="en[name]"
+                      id="english_name"
                       class="form-control"
                     />
-                    <error v-for="(item, index) in errors.last_name" :error="item" :key="index" />
+                    <error v-for="(item, index) in errors['en.name']" :error="item" :key="index" />
                   </div>
                 </div>
                 <div class="form-group row justify-content-center">
@@ -43,6 +49,19 @@
                   <div class="col-md-6">
                     <input type="file" name="avatar" id="avatar" class="form-control" />
                     <error v-for="(item, index) in errors.avatar" :error="item" :key="index" />
+                  </div>
+                </div>
+                <div class="form-group row justify-content-center">
+                  <label for="birthdate" class="col-form-label col-md-3 text-capitalize">birthdate</label>
+                  <div class="col-md-6">
+                    <input
+                      placeholder="birthdate"
+                      type="date"
+                      name="birthdate"
+                      id="birthdate"
+                      class="form-control"
+                    />
+                    <error v-for="(item, index) in errors.birthdate" :error="item" :key="index" />
                   </div>
                 </div>
                 <div class="form-group row justify-content-center">
