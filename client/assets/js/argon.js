@@ -21,8 +21,8 @@
 //
 
 "use strict";
-const Cookies = require("../vendor/js-cookie/js.cookie.js");
-const $ = require("../vendor/jquery/dist/jquery.min.js");
+const Cookies = require("../vendors/js-cookie/js.cookie.js");
+const $ = require("../vendors/jquery/dist/jquery.min.js");
 
 var Layout = (function() {
   function pinSidenav() {
