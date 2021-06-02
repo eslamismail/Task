@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -59,7 +60,18 @@ class User extends Authenticatable implements JWTSubject, TranslatableContract
 
     protected $appends = [
         'avatar',
+        'age',
     ];
+
+    public function getAgeAttribute()
+    {
+        $age = (new Carbon($this->birthdate))->diff()->y;
+        $age .= ' years and ';
+        $age .= (new Carbon($this->birthdate))->diff()->m;
+        $age .= ' months and ';
+        $age .= (new Carbon($this->birthdate))->diff()->d . ' days';
+        return $age;
+    }
 
     public function getAvatarAttribute()
     {

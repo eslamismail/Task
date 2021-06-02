@@ -22,11 +22,20 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $number = $this->faker->randomNumber(3);
+        $unixTimestamp = '1461067200';
         return [
-            'name' => $this->faker->name(),
+            'en' => [
+                'name' => $this->faker->name(),
+            ],
+            'ar' => [
+                'name' => $this->faker->name(),
+            ],
             'email' => $this->faker->unique()->safeEmail(),
+            'avatar_name' => "http://lorempixel.com/{$number}/{$number}/sports/",
+            'birthdate' => $this->faker->date('Y-m-d', $unixTimestamp),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => bcrypt(123456), // password
             'remember_token' => Str::random(10),
         ];
     }

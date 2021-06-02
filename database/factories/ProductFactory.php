@@ -22,11 +22,12 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
+        $number = $this->faker->randomNumber(3);
         return [
-            'name' => 'Product - ' . $this->faker->randomNumber(3),
-            'description' => 'Product Description - ' . $this->faker->randomNumber(3),
-            'image_name' => $this->faker->imageUrl,
-            'price' => $this->faker->randomNumber(2),
+            'name' => $this->faker->word,
+            'description' => $this->faker->sentence,
+            'image_name' => "http://lorempixel.com/{$number}/{$number}/sports/",
+            'price' => $this->faker->randomNumber(3),
         ];
     }
 

@@ -55,11 +55,10 @@ class CartController extends Controller
 
     public function editCart(Request $request)
     {
-        // return $request->all();
         $cart = CartProduct::with('product')->findOrFail($request->id);
         $data = $request->only('quantity');
         $cart->update($data);
-
+        
         return response()->json([
             'cart' => $cart,
             'message' => 'Cart has been updated successfully',

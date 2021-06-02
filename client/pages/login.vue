@@ -73,7 +73,16 @@ export default {
       errors: [],
     };
   },
-  mounted() {},
+  mounted() {
+    window.addEventListener("online", function () {
+      console.log("online");
+
+    });
+
+    window.addEventListener("offline", function () {
+      console.log("offline");
+    });
+  },
   methods: {
     async login() {
       try {

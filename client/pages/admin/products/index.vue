@@ -28,43 +28,14 @@
             </div>
 
             <div class="table-responsive">
-              <vue-good-table
-                styleClass="table align-items-center table-bordered"
+              <data-table
+                :searchOption="searchOption"
                 :columns="columns"
-                :rows="products.data"
-              >
-                <template slot="table-row" slot-scope="props">
-                  <span v-if="props.column.field == 'action'">
-                    <div class="dropdown">
-                      <button
-                        class="btn btn-primary dropdown-toggle text-capitalize"
-                        type="button"
-                        id="dropdownMenuButton"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >action</button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <nuxt-link
-                          class="dropdown-item text-capitalize"
-                          :to="`/admin/products/${props.row.id}/edit`"
-                        >
-                          <i class="fa fa-edit"></i>
-                          edit
-                        </nuxt-link>
-                        <a
-                          class="dropdown-item text-capitalize"
-                          @click.prevent="deleteProduct(props.row.id)"
-                          href="#"
-                        >
-                          <i class="fa fa-trash"></i>
-                          delete
-                        </a>
-                      </div>
-                    </div>
-                  </span>
-                </template>
-              </vue-good-table>
+                :data="products"
+                @fetchData="getProducts"
+                @deleteItem="deleteProduct"
+                @editItem="editProduct"
+              />
             </div>
           </div>
         </div>
@@ -73,9 +44,11 @@
   </div>
 </template>
 <script>
+import DataTable from "@/components/public/datatable";
 export default {
   layout: "dashboard",
   middleware: "admin",
+  components: { DataTable },
   head() {
     return {
       title: "Task Products",
@@ -84,6 +57,7 @@ export default {
   data() {
     return {
       products: { data: [] },
+      searchOption: { enabled: true },
       page: 1,
       columns: [
         {
@@ -115,22 +89,8 @@ export default {
       ],
     };
   },
-  mounted() {
-    document.addEventListener("scroll", async () => {
-      const height = $(".table-responsive").height();
-      const scrollFromHeader = $(document).scrollTop();
-      if (scrollFromHeader >= height) {
-        if (this.page <= this.products.last_page) {
-          const newProducts = await this.getProducts(this.page + 1);
-          if (newProducts.data.length > 0) {
-            this.products.data = this.products.data.concat(newProducts.data);
-          }
-        }
-      }
-    });
-  },
   async fetch() {
-    this.products = await this.getProducts();
+    await this.getProducts();
   },
   watch: {
     products(val, oldVal) {
@@ -141,14 +101,11 @@ export default {
     },
   },
   methods: {
-    async getProducts(page) {
-      if (!page) {
-        page = 1;
-      }
+    async getProducts(page = 1) {
       this.page = page;
       const data = await axios
         .get(`/admin/products?page=${page}`)
-        .then((res) => res.data.products ?? { data: {} })
+        .then((res) => (this.products = res.data.products ?? { data: [] }))
         .catch((error) => {
           if (!error.response) {
             this.$notify({
@@ -174,10 +131,6 @@ export default {
           return { data: [] };
         });
 
-      if (data.last_page <= this.page) {
-        this.page = data.last_page;
-      }
-
       return data;
     },
     async deleteProduct(id) {
@@ -190,7 +143,7 @@ export default {
             text: response.data.message,
             type: "success",
           });
-          this.products = this.products.filter((item) => item.id != id);
+          this.getProducts(this.page);
         } catch (error) {
           if (!error.response) {
             this.$notify({
@@ -205,7 +158,7 @@ export default {
               type: "error",
             });
           } else if (error.response.status == 404) {
-            this.products = this.products.filter((item) => item.id != id);
+            this.getProducts(this.page);
             this.$notify({
               group: "foo",
               text: error.response.data.message,
@@ -222,6 +175,10 @@ export default {
           }
         }
       }
+    },
+
+    editProduct(id) {
+      this.$router.push(`/admin/products/${id}/edit`);
     },
   },
 };

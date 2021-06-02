@@ -8,9 +8,9 @@
     <div class="row">
       <div class="col-md-12" v-for="(item, index) in cart" :key="index">
         <div class="card mb-3">
-          <div class="row g-0">
+          <div class="row g-0 align-items-center">
             <div class="col-md-4">
-              <img width="100%" :src="item.product.image" alt="..." />
+              <img width="80%" :src="item.product.image" alt="..." />
             </div>
             <div class="col-md-8">
               <div class="card-body">
@@ -18,7 +18,7 @@
                 <p class="card-text">{{item.product.description}}</p>
                 <p class="card-text">Price: {{item.product.price}}</p>
                 <p class="card-text">Total: {{item.product.price * item.quantity}}</p>
-                <div class="card-text d-flex justify-content-center">
+                <div class="card-text">
                   <a
                     @click.prevent="deleteItem(item.id)"
                     :class="`btn btn-danger text-white`"
@@ -62,14 +62,14 @@ export default {
   },
   computed: {
     cart() {
-      // this.total = 0;
+      this.total = 0;
       let total = 0;
       for (let index = 0; index < this.$store.state.user.cart.length; index++) {
         const item = this.$store.state.user.cart[index];
         const { price } = item?.product;
-        total += price * item.quantity;
+        this.total += price * item.quantity;
       }
-      this.total = total;
+
       return this.$store.state.user.cart;
     },
   },
@@ -97,7 +97,6 @@ export default {
           });
         } else if (error.response.status == 401) {
           this.$refreshUser();
-          this.getCart();
         } else {
           this.$notify({
             group: "foo",

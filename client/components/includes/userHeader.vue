@@ -91,7 +91,6 @@ export default {
           });
         } else if (error.response.status == 401) {
           this.$refreshUser();
-          this.getCart();
         } else {
           this.$notify({
             group: "foo",

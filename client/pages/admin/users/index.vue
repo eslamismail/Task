@@ -28,39 +28,14 @@
             </div>
 
             <div class="table-responsive">
-              <vue-good-table styleClass="table table-bordered" :columns="columns" :rows="users">
-                <template slot="table-row" slot-scope="props">
-                  <span v-if="props.column.field == 'action'">
-                    <div class="dropdown">
-                      <button
-                        class="btn btn-primary dropdown-toggle text-capitalize"
-                        type="button"
-                        id="dropdownMenuButton"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >action</button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <nuxt-link
-                          class="dropdown-item text-capitalize"
-                          :to="`/admin/users/${props.row.id}/edit`"
-                        >
-                          <i class="fa fa-edit"></i>
-                          edit
-                        </nuxt-link>
-                        <a
-                          class="dropdown-item text-capitalize"
-                          @click.prevent="deleteCustomer(props.row.id)"
-                          href="#"
-                        >
-                          <i class="fa fa-trash"></i>
-                          delete
-                        </a>
-                      </div>
-                    </div>
-                  </span>
-                </template>
-              </vue-good-table>
+              <data-table
+                :searchOption="searchOption"
+                :columns="columns"
+                :data="users"
+                @fetchData="getUsers"
+                @deleteItem="deleteCustomer"
+                @editItem="editCustomer"
+              />
             </div>
           </div>
         </div>
@@ -69,11 +44,14 @@
   </div>
 </template>
 <script>
+import DataTable from "@/components/public/datatable";
 export default {
   layout: "dashboard",
   middleware: "admin",
+  components: { DataTable },
   data() {
     return {
+      searchOption: { enabled: true },
       columns: [
         {
           label: "#",
@@ -81,16 +59,13 @@ export default {
           type: "number",
         },
         {
-          label: "arabic name",
-          field: "translations.0.name",
-        },
-        {
           label: "english name",
           field: "translations.1.name",
         },
         {
-          label: "birthdate",
-          field: "birthdate",
+          label: "age",
+          field: "age",
+          sortable: true,
         },
         {
           label: "email",
@@ -105,19 +80,33 @@ export default {
           field: "action",
         },
       ],
-      users: [],
+      users: { data: [] },
+      page: 1,
     };
   },
   head() {
     return {
-      title: "Task Customers",
+      title: "Task Users",
     };
   },
   async fetch() {
-    this.users = await axios
-      .get("/admin/users")
-      .then((res) => res.data.users)
-      .catch((error) => {
+    this.getUsers();
+  },
+  watch: {
+    users(val, oldVal) {
+      this.users.data.forEach((item, key) => {
+        item.created_at = moment(item.created_at).locale("en").format("llll");
+        item.birthdate = moment(item.birthdate).locale("en").format("llll");
+      });
+    },
+  },
+  methods: {
+    async getUsers(page = 1) {
+      this.page = page;
+      try {
+        const response = await axios.get(`/admin/users?page=${page}`);
+        this.users = response.data.users;
+      } catch (error) {
         if (!error.response) {
           this.$notify({
             group: "foo",
@@ -139,18 +128,8 @@ export default {
             type: "error",
           });
         }
-        return [];
-      });
-  },
-  watch: {
-    users(val, oldVal) {
-      this.users.forEach((item, key) => {
-        item.created_at = moment(item.created_at).locale("en").format("llll");
-        item.birthdate = momentH(item.birthdate).format("iYYYY - iMMM - iD");
-      });
+      }
     },
-  },
-  methods: {
     async deleteCustomer(id) {
       let ask = confirm("Ary you sure ?");
       if (ask) {
@@ -161,7 +140,7 @@ export default {
             text: response.data.message,
             type: "success",
           });
-          this.users = this.users.filter((item) => item.id != id);
+          this.getUsers(this.page);
         } catch (error) {
           if (!error.response) {
             this.$notify({
@@ -176,7 +155,7 @@ export default {
               type: "error",
             });
           } else if (error.response.status == 404) {
-            this.users = this.users.filter((item) => item.id != id);
+            this.getUsers(this.page);
             this.$notify({
               group: "foo",
               text: error.response.data.message,
@@ -193,6 +172,9 @@ export default {
           }
         }
       }
+    },
+    editCustomer(id) {
+      this.$router.push(`/admin/users/${id}/edit`);
     },
   },
 };

@@ -30,5 +30,7 @@ Vue.use(BootstrapVue);
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin);
 
+Vue.component("pagination", require("laravel-vue-pagination"));
+
 window.moment = require("moment");
 window.momentH = require("moment-hijri");

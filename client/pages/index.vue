@@ -84,7 +84,21 @@ export default {
           this.$store.commit("user/addToCart", cart);
         }
       } catch (error) {
-        console.log({ ...error });
+        if (!error.response) {
+          this.$notify({
+            group: "foo",
+            text: "no internet access",
+            type: "success",
+          });
+        } else if (error.response.status == 401) {
+          this.$refreshUser();
+
+          this.$notify({
+            group: "foo",
+            text: error.response.data.message,
+            type: "success",
+          });
+        }
       }
     },
   },
