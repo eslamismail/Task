@@ -2,25 +2,15 @@
 
 namespace App\Models;
 
-use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-use Astrotomic\Translatable\Translatable;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Storage;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject, TranslatableContract
+class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
-    use Translatable;
-
-    public $translatedAttributes = [
-        'name',
-    ];
-
-    public $translationModel = 'App\Models\UsersTranslation';
 
     public function getJWTIdentifier()
     {
@@ -60,21 +50,13 @@ class User extends Authenticatable implements JWTSubject, TranslatableContract
 
     protected $appends = [
         'avatar',
-        'age',
     ];
-
-    public function getAgeAttribute()
-    {
-        $age = (new Carbon($this->birthdate))->diff()->y;
-        $age .= ' years and ';
-        $age .= (new Carbon($this->birthdate))->diff()->m;
-        $age .= ' months and ';
-        $age .= (new Carbon($this->birthdate))->diff()->d . ' days';
-        return $age;
-    }
 
     public function getAvatarAttribute()
     {
+        if (strpos($this->avatar_name, 'http') !== false) {
+            return $this->avatar_name;
+        }
         if (Storage::disk('uploads')->exists($this->avatar_name)) {
             return url(Storage::disk('uploads')->url($this->avatar_name));
         }

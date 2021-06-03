@@ -26,10 +26,16 @@ Vue.prototype.$refreshUser = () => {
         token: response.data.token,
         user: response.data.user
       };
-      if (!data.user) {
-        $nuxt.$store.commit("user/logout", {});
-      }
       $nuxt.$store.commit("user/refreshToken", data);
+      axios
+        .get("user")
+        .then(response => {
+          const { user } = response.data;
+          $nuxt.$store.commit("user/refresh", user);
+        })
+        .catch(error => {
+          $nuxt.$store.commit("user/logout", {});
+        });
     })
     .catch(error => {
       $nuxt.$store.commit("user/logout", {});

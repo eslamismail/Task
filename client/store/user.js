@@ -22,10 +22,10 @@ export const mutations = {
   refresh(state, user) {
     state.profile = user;
   },
-  refreshToken(state, { token, admin }) {
+  refreshToken(state, { token, user }) {
     localStorage.setItem("token", token);
     state.token = token;
-    state.admin = admin;
+    state.profile = user;
     axios.defaults.headers.authorization = `Bearer ${token}`;
   },
   setCart(state, carts) {

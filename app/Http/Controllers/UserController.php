@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Carbon\Carbon;
 use Hash;
 use Illuminate\Http\Request;
 use Storage;
@@ -72,22 +71,17 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
-        $age = (new Carbon())->subYears(18);
         $request->validate([
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:6',
-            'password_confirmation' => 'required|same:password',
+            'password_confirmation' => 'same:password',
             'avatar' => 'mimes:png,jpeg,jpg',
-            'birthdate' => 'required|date|before:' . $age,
-            'ar.name' => 'required|string|min:3|max:255',
-            'en.name' => 'required|string|min:3|max:255',
+            'name' => 'required|string|min:3|max:255',
         ]);
 
         $data = $request->only([
-            'ar.name',
-            'en.name',
+            'name',
             'email',
-            'birthdate',
         ]);
 
         $data['password'] = bcrypt($request->password);

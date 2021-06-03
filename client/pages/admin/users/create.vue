@@ -19,36 +19,16 @@
             <div class="card-body">
               <form @submit.prevent="saveCustomer()" autocomplete="off" method="post">
                 <div class="form-group row">
-                  <label
-                    for="first_name"
-                    class="col-md-3 col-sm-3 col-form-label text-capitalize"
-                  >arabic name</label>
+                  <label for="name" class="col-md-3 col-sm-3 col-form-label text-capitalize">name</label>
                   <div class="col-md-8 col-sm-9">
                     <input
                       type="text"
-                      name="ar[name]"
-                      placeholder="Arabic name"
-                      id="arabic_name"
+                      name="name"
+                      placeholder="name"
+                      id="name"
                       class="form-control"
                     />
-                    <error v-for="(item, index) in errors['ar.name']" :error="item" :key="index" />
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <label
-                    for="english_name"
-                    class="col-form-label col-md-3 col-sm-3 text-capitalize"
-                  >english name</label>
-                  <div class="col-md-8 col-sm-9">
-                    <input
-                      placeholder="English name"
-                      type="text"
-                      name="en[name]"
-                      id="english_name"
-                      class="form-control"
-                    />
-                    <error v-for="(item, index) in errors['en.name']" :error="item" :key="index" />
+                    <error v-for="(item, index) in errors.name" :error="item" :key="index" />
                   </div>
                 </div>
 
@@ -63,23 +43,6 @@
                       class="form-control"
                     />
                     <error v-for="(item, index) in errors.email" :error="item" :key="index" />
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <label
-                    for="birthdate"
-                    class="col-form-label col-md-3 col-sm-3 text-capitalize"
-                  >birthdate</label>
-                  <div class="col-md-8 col-sm-9">
-                    <input
-                      placeholder="birthdate"
-                      type="date"
-                      name="birthdate"
-                      id="birthdate"
-                      class="form-control"
-                    />
-                    <error v-for="(item, index) in errors.birthdate" :error="item" :key="index" />
                   </div>
                 </div>
 

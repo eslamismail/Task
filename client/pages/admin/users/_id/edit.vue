@@ -19,38 +19,16 @@
             <div class="card-body">
               <form @submit.prevent="updateuser()" autocomplete="off" method="post">
                 <div class="form-group row">
-                  <label
-                    for="first_name"
-                    class="col-md-3 col-sm-3 col-form-label text-capitalize"
-                  >arabic name</label>
+                  <label for="name" class="col-form-label col-md-3 col-sm-3 text-capitalize">name</label>
                   <div class="col-md-8 col-sm-9">
                     <input
+                      placeholder="name"
                       type="text"
-                      name="ar[name]"
-                      placeholder="Arabic name"
-                      id="arabic_name"
+                      name="name"
+                      id="name"
                       class="form-control"
-                      :value="getName(user,'ar')"
                     />
-                    <error v-for="(item, index) in errors['ar.name']" :error="item" :key="index" />
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <label
-                    for="english_name"
-                    class="col-form-label col-md-3 col-sm-3 text-capitalize"
-                  >english name</label>
-                  <div class="col-md-8 col-sm-9">
-                    <input
-                      placeholder="English name"
-                      type="text"
-                      name="en[name]"
-                      id="english_name"
-                      class="form-control"
-                      :value="getName(user,'en')"
-                    />
-                    <error v-for="(item, index) in errors['en.name']" :error="item" :key="index" />
+                    <error v-for="(item, index) in errors.name" :error="item" :key="index" />
                   </div>
                 </div>
 
@@ -63,27 +41,8 @@
                       name="email"
                       id="email"
                       class="form-control"
-                      :value="user.email"
                     />
                     <error v-for="(item, index) in errors.email" :error="item" :key="index" />
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <label
-                    for="birthdate"
-                    class="col-form-label col-md-3 col-sm-3 text-capitalize"
-                  >birthdate</label>
-                  <div class="col-md-8 col-sm-9">
-                    <input
-                      placeholder="birthdate"
-                      type="date"
-                      name="birthdate"
-                      id="birthdate"
-                      class="form-control"
-                      :value="solveDate(user.birthdate)"
-                    />
-                    <error v-for="(item, index) in errors.birthdate" :error="item" :key="index" />
                   </div>
                 </div>
 
@@ -181,29 +140,19 @@ export default {
       user: {},
     };
   },
-  created() {
-    this.getuser(this.$route.params.id);
+  async mounted() {
+    await this.getuser(this.$route.params.id);
   },
   methods: {
-    getName(user, lacale = "ar") {
-      const { translations } = user;
-
-      if (translations && translations.length > 0) {
-        const { name } = translations.find((item) => item.locale == lacale);
-        return name;
-      }
-    },
-    solveDate(date) {
-      if (date) {
-        date = moment(date).locale("en").format("yyy-MM-DD");
-        console.log(date);
-        return date;
-      }
+    setElementValues({ name, email }) {
+      document.getElementById("name").value = name;
+      document.getElementById("email").value = email;
     },
     async getuser(id) {
       try {
         let response = await axios.get(`/admin/users/${id}`);
         this.user = response.data.user;
+        this.setElementValues(this.user);
       } catch (error) {
         if (!error.response) {
           this.$notify({

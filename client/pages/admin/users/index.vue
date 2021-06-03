@@ -57,27 +57,32 @@ export default {
           label: "#",
           field: "id",
           type: "number",
+          sortable: true,
         },
         {
-          label: "english name",
-          field: "translations.1.name",
-        },
-        {
-          label: "age",
-          field: "age",
+          label: "name",
+          field: "name",
           sortable: true,
         },
         {
           label: "email",
           field: "email",
+          sortable: true,
+        },
+        {
+          label: "view cart",
+          field: "cart_link",
+          sortable: true,
         },
         {
           label: "created at",
           field: "created_at",
+          sortable: true,
         },
         {
           label: "Action",
           field: "action",
+          sortable: true,
         },
       ],
       users: { data: [] },
@@ -89,14 +94,15 @@ export default {
       title: "Task Users",
     };
   },
-  async fetch() {
-    this.getUsers();
+  async created() {
+    await this.getUsers();
   },
   watch: {
     users(val, oldVal) {
       this.users.data.forEach((item, key) => {
-        item.created_at = moment(item.created_at).locale("en").format("llll");
-        item.birthdate = moment(item.birthdate).locale("en").format("llll");
+        const { id } = item;
+        item.created_at = moment(item.created_at).format("llll");
+        item.cart_link = `/admin/users/${id}/cart`;
       });
     },
   },

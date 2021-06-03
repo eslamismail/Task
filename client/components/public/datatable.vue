@@ -37,19 +37,20 @@
             </div>
           </div>
         </span>
+        <span v-else-if="props.column.field == 'cart_link'">
+          <nuxt-link :to="props.row.cart_link" class="btn btn-primary text-capitalize">cart</nuxt-link>
+        </span>
       </template>
       <template slot="pagination-bottom">
-        <pagination
-          class="m-4 pb-4 justify-content-end"
-          :data="data"
-          @pagination-change-page="fetchData"
-        ></pagination>
+        <paginate @pagination-change-page="fetchData" :data="data" />
       </template>
     </vue-good-table>
   </div>
 </template>
 <script>
+import paginate from "./paginate";
 export default {
+  components: { paginate },
   props: {
     columns: {
       type: Array,
@@ -64,12 +65,12 @@ export default {
       required: false,
     },
   },
+
   methods: {
     fetchData(page = 1) {
       this.$emit("fetchData", page);
     },
     editItem(id) {
-      // console.log("object");
       this.$emit("editItem", id);
     },
     deleteItem(id) {

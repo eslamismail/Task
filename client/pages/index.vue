@@ -1,15 +1,17 @@
 <template >
   <div>
-    <div class="container">
-      <div class="products row mt-5 align-items-center">
-        <product-component
-          @addToCart="addToCart"
-          v-for="(item, index) in products.data"
-          :product="item"
-          :key="index"
-        />
+    <perfect-scrollbar @ps-scroll-y="onScroll" ref="scrollbar">
+      <div class="container">
+        <div class="products row mt-5 align-items-center">
+          <product-component
+            @addToCart="addToCart"
+            v-for="(item, index) in products.data"
+            :product="item"
+            :key="index"
+          />
+        </div>
       </div>
-    </div>
+    </perfect-scrollbar>
   </div>
 </template>
 <script>
@@ -26,7 +28,7 @@ export default {
   },
   data() {
     return {
-      products: { data: [] },
+      products: { data: [], links: [] },
       page: 1,
     };
   },
@@ -35,20 +37,22 @@ export default {
       return this.$store.state.user.cart;
     },
   },
-  mounted() {
-    document.addEventListener("scroll", async () => {
-      if ($(window).scrollTop() + $(window).height() == $(document).height()) {
-        const newProducts = await this.getProducts(this.page + 1);
-        if (newProducts.data.length > 0) {
-          this.products.data = this.products.data.concat(newProducts.data);
-        }
-      }
-    });
-  },
-  async fetch() {
+
+  async created() {
     this.products = await this.getProducts();
   },
   methods: {
+    async onScroll(event) {
+      const end = this.$refs.scrollbar.ps.reach.y;
+      if (end == "end") {
+        // console.log(true);
+        const newProducts = await this.getProducts(this.page + 1);
+        if (newProducts.data.length > 0) {
+          this.products.data = this.products.data.concat(newProducts.data);
+          this.products.links = newProducts.links;
+        }
+      }
+    },
     async getProducts(page) {
       if (!page) {
         page = 1;
@@ -104,3 +108,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.ps {
+  height: calc(100vh - 80px);
+}
+</style>

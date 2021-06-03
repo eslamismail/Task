@@ -25,7 +25,6 @@
                       type="text"
                       name="name"
                       placeholder="name"
-                      :value="product.name"
                       id="name"
                       class="form-control"
                     />
@@ -43,7 +42,6 @@
                       id="description"
                       placeholder="Description"
                       class="form-control"
-                      :value="product.description"
                     ></textarea>
                     <error v-for="(item, index) in errors.description" :error="item" :key="index" />
                   </div>
@@ -105,7 +103,6 @@
                       id="price"
                       class="form-control"
                       placeholder="Price"
-                      :value="product.price"
                     />
                     <error v-for="(item, index) in errors.price" :error="item" :key="index" />
                   </div>
@@ -147,12 +144,26 @@ export default {
       errors: {},
     };
   },
-  async fetch() {
-    this.product = await axios
-      .get(`/admin/products/${this.$route.params.id}`)
-      .then((res) => res.data.product ?? {})
-      .catch((error) => {
+  async mounted() {
+    await this.getpPoduct();
+  },
+
+  methods: {
+    setElementValues({ name, description, price }) {
+      document.getElementById("name").value = name;
+      document.getElementById("description").value = description;
+      document.getElementById("price").value = price;
+    },
+    async getpPoduct() {
+      try {
+        const response = await axios.get(
+          `admin/products/${this.$route.params.id}`
+        );
+        this.product = response.data.product;
+        this.setElementValues(this.product);
+      } catch (error) {
         if (!error.response) {
+          console.log(error);
           this.$notify({
             group: "foo",
             text: "No internet access",
@@ -180,10 +191,8 @@ export default {
             type: "error",
           });
         }
-        return {};
-      });
-  },
-  methods: {
+      }
+    },
     async updateProduct() {
       let form = new FormData(event.target);
       form.append("_method", "PUT");

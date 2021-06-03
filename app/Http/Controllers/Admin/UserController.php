@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\CartProduct;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Storage;
 
@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::paginate();
+        $users = User::paginate(10);
 
         return response()->json([
             'users' => $users,
@@ -21,27 +21,22 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $age = (new Carbon())->subYears(18);
         $request->validate([
             'email' => 'required|email|unique:users,email',
-            'birthdate' => 'required|date|before:' . $age,
             'password' => 'required|string|min:6',
             'password_confirmation' => 'required|same:password',
-            'ar.name' => 'required|string|min:3|max:255',
-            'en.name' => 'required|string|min:3|max:255',
+            'name' => 'required|string|min:3|max:255',
             'avatar' => 'mimes:png,jpeg,jpg',
         ]);
 
         $data = $request->only([
-            'ar.name',
-            'en.name',
+            'name',
             'email',
             'birthdate',
         ]);
 
         $data['password'] = bcrypt($request->password);
 
-        // return $data;
         if ($request->has('avatar')) {
             $data['avatar_name'] = Storage::disk('uploads')->put('users', $request->avatar);
         }
@@ -75,23 +70,20 @@ class UserController extends Controller
 
     public function update($id, Request $request)
     {
-        $age = (new Carbon())->subYears(18);
         $request->validate([
             'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'nullable|string|min:6',
             'password_confirmation' => 'nullable|same:password|min:6',
-            'ar.name' => 'required|string|min:3|max:255',
-            'en.name' => 'required|string|min:3|max:255',
+            'name' => 'required|string|min:3|max:255',
             'avatar' => 'mimes:png,jpeg,jpg',
-            'birthdate' => 'required|date|before:' . $age,
         ]);
 
         $data = $request->only([
-            'ar.name',
-            'en.name',
+            'name',
             'email',
             'birthdate',
         ]);
+
         $user = User::findOrFail($id);
         if (!empty($request->password)) {
             $data['password'] = bcrypt($request->password);
@@ -107,6 +99,29 @@ class UserController extends Controller
 
         return response()->json([
             'message' => 'User updated successfully',
+        ]);
+    }
+
+    public function cart($id)
+    {
+        $carts = CartProduct::with(['product'])->whereHas('cart', function ($q) use ($id) {
+            $q->where('user_id', $id);
+        })->get(['quantity', 'product_id']);
+
+        $total = 0;
+        foreach ($carts as $cart) {
+            if ($cart->product) {
+                $total += ($cart->product->price * $cart->quantity);
+            }
+        }
+
+        $carts = CartProduct::with(['product'])->whereHas('cart', function ($q) use ($id) {
+            $q->where('user_id', $id);
+        })->paginate(10);
+
+        return response()->json([
+            'carts' => $carts,
+            'total' => $total,
         ]);
     }
 }

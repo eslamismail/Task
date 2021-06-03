@@ -56,8 +56,8 @@ export default {
   },
   data() {
     return {
-      products: { data: [] },
-      searchOption: { enabled: true },
+      products: { data: [], per_page: null },
+      searchOption: { enabled: true, perPage: 50 },
       page: 1,
       columns: [
         {
@@ -89,20 +89,26 @@ export default {
       ],
     };
   },
-  async fetch() {
+  async created() {
     await this.getProducts();
+  },
+  mounted() {
+    this.searchOption = {
+      enabled: true,
+      perPage: this.products.per_page,
+    };
   },
   watch: {
     products(val, oldVal) {
       this.products.data.forEach((item) => {
         item.created_at = moment(item.created_at).format("llll");
-        item.comission = `${item.comission}%`;
       });
     },
   },
   methods: {
     async getProducts(page = 1) {
       this.page = page;
+
       const data = await axios
         .get(`/admin/products?page=${page}`)
         .then((res) => (this.products = res.data.products ?? { data: [] }))

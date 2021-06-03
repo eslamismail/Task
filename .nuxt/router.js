@@ -15,6 +15,7 @@ const _54b0aece = () => interopDefault(import('../client/pages/admin/users/index
 const _3c0c756c = () => interopDefault(import('../client/pages/admin/products/create.vue' /* webpackChunkName: "pages/admin/products/create" */))
 const _691975b0 = () => interopDefault(import('../client/pages/admin/users/create.vue' /* webpackChunkName: "pages/admin/users/create" */))
 const _1f7f868d = () => interopDefault(import('../client/pages/admin/products/_id/edit.vue' /* webpackChunkName: "pages/admin/products/_id/edit" */))
+const _034970ee = () => interopDefault(import('../client/pages/admin/users/_id/cart.vue' /* webpackChunkName: "pages/admin/users/_id/cart" */))
 const _5d74b573 = () => interopDefault(import('../client/pages/admin/users/_id/edit.vue' /* webpackChunkName: "pages/admin/users/_id/edit" */))
 
 const emptyFn = () => {}
@@ -109,6 +110,10 @@ export const routerOptions = {
     component: _1f7f868d,
     name: "admin-products-id-edit___ar"
   }, {
+    path: "/ar/admin/users/:id/cart",
+    component: _034970ee,
+    name: "admin-users-id-cart___ar"
+  }, {
     path: "/ar/admin/users/:id/edit",
     component: _5d74b573,
     name: "admin-users-id-edit___ar"
@@ -116,6 +121,10 @@ export const routerOptions = {
     path: "/admin/products/:id/edit",
     component: _1f7f868d,
     name: "admin-products-id-edit___en"
+  }, {
+    path: "/admin/users/:id/cart",
+    component: _034970ee,
+    name: "admin-users-id-cart___en"
   }, {
     path: "/admin/users/:id/edit",
     component: _5d74b573,

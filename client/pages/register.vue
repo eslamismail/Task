@@ -11,37 +11,18 @@
                     <h2 class="text-center text-capitalize">user register</h2>
                   </div>
                 </div>
-                <div class="form-group row justify-content-center">
-                  <label
-                    for="arabic_name"
-                    class="col-form-label col-md-3 text-capitalize"
-                  >arabic name</label>
-                  <div class="col-md-6">
-                    <input
-                      placeholder="arabic name"
-                      type="text"
-                      name="ar[name]"
-                      id="arabic_name"
-                      class="form-control"
-                    />
-                    <error v-for="(item, index) in errors['ar.name']" :error="item" :key="index" />
-                  </div>
-                </div>
 
                 <div class="form-group row justify-content-center">
-                  <label
-                    for="english_name"
-                    class="col-form-label col-md-3 text-capitalize"
-                  >English name</label>
+                  <label for="name" class="col-form-label col-md-3 text-capitalize">name</label>
                   <div class="col-md-6">
                     <input
-                      placeholder="English name"
+                      placeholder="name"
                       type="text"
-                      name="en[name]"
-                      id="english_name"
+                      name="name"
+                      id="name"
                       class="form-control"
                     />
-                    <error v-for="(item, index) in errors['en.name']" :error="item" :key="index" />
+                    <error v-for="(item, index) in errors.name" :error="item" :key="index" />
                   </div>
                 </div>
                 <div class="form-group row justify-content-center">
@@ -51,19 +32,7 @@
                     <error v-for="(item, index) in errors.avatar" :error="item" :key="index" />
                   </div>
                 </div>
-                <div class="form-group row justify-content-center">
-                  <label for="birthdate" class="col-form-label col-md-3 text-capitalize">birthdate</label>
-                  <div class="col-md-6">
-                    <input
-                      placeholder="birthdate"
-                      type="date"
-                      name="birthdate"
-                      id="birthdate"
-                      class="form-control"
-                    />
-                    <error v-for="(item, index) in errors.birthdate" :error="item" :key="index" />
-                  </div>
-                </div>
+
                 <div class="form-group row justify-content-center">
                   <label for="email" class="col-form-label col-md-3 text-capitalize">email</label>
                   <div class="col-md-6">
