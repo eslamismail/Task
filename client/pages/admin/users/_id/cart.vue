@@ -52,6 +52,12 @@ export default {
       columns: [
         {
           label: "#",
+          field: "key",
+          type: "number",
+          sortable: true,
+        },
+        {
+          label: "id",
           field: "id",
           type: "number",
           sortable: true,
@@ -86,7 +92,8 @@ export default {
   },
   watch: {
     carts(val, oldVal) {
-      this.carts.data.forEach((item) => {
+      this.carts.data.forEach((item, index) => {
+        item.key = index + 1;
         item.created_at = moment(item.created_at).format("llll");
       });
     },

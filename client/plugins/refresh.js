@@ -8,10 +8,18 @@ Vue.prototype.$refresh = () => {
         token: response.data.token,
         admin: response.data.admin
       };
-      if (!data.admin) {
-        $nuxt.$store.commit("admin/login/logout", {});
-      }
+
       $nuxt.$store.commit("admin/login/refreshToken", data);
+
+      axios
+        .get("admin/user")
+        .then(response => {
+          const { admin } = response.data;
+          $nuxt.$store.commit("admin/login/refresh", admin);
+        })
+        .catch(error => {
+          $nuxt.$store.commit("admin/login/logout", {});
+        });
     })
     .catch(error => {
       $nuxt.$store.commit("admin/login/logout", {});

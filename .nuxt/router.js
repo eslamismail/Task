@@ -5,7 +5,6 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _62a52255 = () => interopDefault(import('../client/pages/admin/index.vue' /* webpackChunkName: "pages/admin/index" */))
-const _3891e556 = () => interopDefault(import('../client/pages/index.vue' /* webpackChunkName: "pages/index" */))
 const _e54bad26 = () => interopDefault(import('../client/pages/cart.vue' /* webpackChunkName: "pages/cart" */))
 const _a5429f28 = () => interopDefault(import('../client/pages/login.vue' /* webpackChunkName: "pages/login" */))
 const _0734fe20 = () => interopDefault(import('../client/pages/register.vue' /* webpackChunkName: "pages/register" */))
@@ -17,6 +16,7 @@ const _691975b0 = () => interopDefault(import('../client/pages/admin/users/creat
 const _1f7f868d = () => interopDefault(import('../client/pages/admin/products/_id/edit.vue' /* webpackChunkName: "pages/admin/products/_id/edit" */))
 const _034970ee = () => interopDefault(import('../client/pages/admin/users/_id/cart.vue' /* webpackChunkName: "pages/admin/users/_id/cart" */))
 const _5d74b573 = () => interopDefault(import('../client/pages/admin/users/_id/edit.vue' /* webpackChunkName: "pages/admin/users/_id/edit" */))
+const _3891e556 = () => interopDefault(import('../client/pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
 
@@ -32,107 +32,55 @@ export const routerOptions = {
   routes: [{
     path: "/admin",
     component: _62a52255,
-    name: "admin___en"
-  }, {
-    path: "/ar",
-    component: _3891e556,
-    name: "index___ar"
+    name: "admin"
   }, {
     path: "/cart",
     component: _e54bad26,
-    name: "cart___en"
+    name: "cart"
   }, {
     path: "/login",
     component: _a5429f28,
-    name: "login___en"
+    name: "login"
   }, {
     path: "/register",
     component: _0734fe20,
-    name: "register___en"
+    name: "register"
   }, {
     path: "/admin/login",
     component: _2c4cc56c,
-    name: "admin-login___en"
+    name: "admin-login"
   }, {
     path: "/admin/products",
     component: _691b03f4,
-    name: "admin-products___en"
+    name: "admin-products"
   }, {
     path: "/admin/users",
     component: _54b0aece,
-    name: "admin-users___en"
-  }, {
-    path: "/ar/admin",
-    component: _62a52255,
-    name: "admin___ar"
-  }, {
-    path: "/ar/cart",
-    component: _e54bad26,
-    name: "cart___ar"
-  }, {
-    path: "/ar/login",
-    component: _a5429f28,
-    name: "login___ar"
-  }, {
-    path: "/ar/register",
-    component: _0734fe20,
-    name: "register___ar"
+    name: "admin-users"
   }, {
     path: "/admin/products/create",
     component: _3c0c756c,
-    name: "admin-products-create___en"
+    name: "admin-products-create"
   }, {
     path: "/admin/users/create",
     component: _691975b0,
-    name: "admin-users-create___en"
-  }, {
-    path: "/ar/admin/login",
-    component: _2c4cc56c,
-    name: "admin-login___ar"
-  }, {
-    path: "/ar/admin/products",
-    component: _691b03f4,
-    name: "admin-products___ar"
-  }, {
-    path: "/ar/admin/users",
-    component: _54b0aece,
-    name: "admin-users___ar"
-  }, {
-    path: "/ar/admin/products/create",
-    component: _3c0c756c,
-    name: "admin-products-create___ar"
-  }, {
-    path: "/ar/admin/users/create",
-    component: _691975b0,
-    name: "admin-users-create___ar"
-  }, {
-    path: "/ar/admin/products/:id/edit",
-    component: _1f7f868d,
-    name: "admin-products-id-edit___ar"
-  }, {
-    path: "/ar/admin/users/:id/cart",
-    component: _034970ee,
-    name: "admin-users-id-cart___ar"
-  }, {
-    path: "/ar/admin/users/:id/edit",
-    component: _5d74b573,
-    name: "admin-users-id-edit___ar"
+    name: "admin-users-create"
   }, {
     path: "/admin/products/:id/edit",
     component: _1f7f868d,
-    name: "admin-products-id-edit___en"
+    name: "admin-products-id-edit"
   }, {
     path: "/admin/users/:id/cart",
     component: _034970ee,
-    name: "admin-users-id-cart___en"
+    name: "admin-users-id-cart"
   }, {
     path: "/admin/users/:id/edit",
     component: _5d74b573,
-    name: "admin-users-id-edit___en"
+    name: "admin-users-id-edit"
   }, {
     path: "/",
     component: _3891e556,
-    name: "index___en"
+    name: "index"
   }],
 
   fallback: false
